@@ -6,7 +6,7 @@ from six.moves.urllib.parse import parse_qs, urlencode, urlparse, urlunparse
 register = template.Library()
 
 
-@register.inclusion_tag('django_rangepaginator/bootstrap3.html')
+@register.inclusion_tag('django_rangepaginator/bootstrap4.html')
 def paginate(page=None, request=None, distance=2, edge=1, extra_class='',
              text_labels=True):
     paginator = page.paginator

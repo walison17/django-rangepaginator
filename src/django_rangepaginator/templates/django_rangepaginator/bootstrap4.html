@@ -1,0 +1,67 @@
+{% load i18n %}
+{% spaceless %}
+<nav aria-label="...">
+    <ul class="pagination{% if extra_class %} {{ extra_class }}{% endif %}">
+        {% if page.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="{{ prev_page_url }}">
+            {% if text_labels %}
+                <span>{% trans "Previous" %}</span>
+            {% else %}
+                <span aria-hidden="true">&laquo;</span>
+            {% endif %}
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span>
+            {% if text_labels %}
+                {% trans "Previous" %}
+            {% else %}
+                <span aria-hidden="true">&laquo;</span>
+            {% endif %}
+            </span>
+        </li>
+        {% endif %}
+        {% for page_num, url in pages %}
+            {% if page_num == current %}
+            <li class="page-item active">
+                <a class="page-link">{{ page_num }}
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            {% elif page_num %}
+            <li class="page-item">
+                <a class="page-link" href="{{ url }}">{{ page_num }}</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled skip">
+                <span>&#8230;</span>
+            </li>
+        {% endif %}
+        {% endfor %}
+
+        {% if page.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="{{ next_page_url }}">
+            {% if text_labels %}
+                {% trans "Next" %}
+            {% else %}
+                <span aria-hidden="true">&raquo;</span>
+            {% endif %}
+            </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span>
+            {% if text_labels %}
+                {% trans "Next" %}
+            {% else %}
+                <span aria-hidden="true">&raquo;</span>
+            {% endif %}
+            </span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endspaceless %}
